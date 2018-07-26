@@ -1,6 +1,6 @@
 App({
   globalData:{
-    g_isPlayingMusic:false,
-    g_currentMusicPostId:null
+    g_isPlayingMusic:false,//音乐是不是被播放
+    g_currentMusicPostId:null//哪一首音乐被播放
   }
 })
