@@ -1,10 +1,10 @@
-function covertToStarsArray(stars){
-  var num=stars.toString().substring(0,1);
-  var array=[];
-  for(var i=1;i<=5;i++){
-    if(i<=num){
+function covertToStarsArray(stars) {
+  var num = stars.toString().substring(0, 1);
+  var array = [];
+  for (var i = 1; i <= 5; i++) {
+    if (i <= num) {
       array.push(1);
-    }else{
+    } else {
       array.push(0);
     }
   }
@@ -12,23 +12,45 @@ function covertToStarsArray(stars){
   return array;
 }
 
-function http(url,callBack){
+function http(url, callBack) {
   wx.request({
     url: url,
     method: 'GET',
     header: {
       "Content-Type": "json"
     },
-    success: function (res) {
+    success: function(res) {
       callBack(res.data);
     },
-    fail: function (error) {
+    fail: function(error) {
       console.log(error);
     }
   })
 }
 
-module.exports={
+function convertToCastString(casts) {
+  var castsjoin = "";
+  for (var idx in casts) {
+    castsjoin = castsjoin + casts[idx].name + " / ";
+  }
+  return castsjoin.substring(0, castsjoin.length - 2);
+}
+
+function convertToCastInfos(casts) {
+  var castsArray = []
+  for (var idx in casts) {
+    var cast = {
+      img: casts[idx].avatars ? casts[idx].avatars.large : "",
+      name: casts[idx].name
+    }
+    castsArray.push(cast);
+  }
+  return castsArray;
+}
+
+module.exports = {
   covertToStarsArray: covertToStarsArray,
-  http:http
+  http: http,
+  convertToCastString: convertToCastString,
+  convertToCastInfos: convertToCastInfos
 }
