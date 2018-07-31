@@ -51,6 +51,7 @@ Page({
     var refreshUrl=this.data.requestUrl+"?start=0&count=20";
     this.data.movies={};
     this.data.isEmpty=true;
+    this.totalCount=0;
     util.http(refreshUrl,this.processDoubanData);
     wx.showNavigationBarLoading();
   },
@@ -94,6 +95,12 @@ Page({
       title: this.data.navigateTitle,
       success: function() {
       }
+    })
+  },
+  onMovieTap:function(event){
+    var movieId=event.currentTarget.dataset.movieid;
+    wx.navigateTo({
+      url:'../movie-detail/movie-detail?id='+movieId
     })
   }
 })
